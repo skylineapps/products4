@@ -1,0 +1,29 @@
+<h1>all products</h1>
+<table>
+	<thead>
+		<tr>
+			<td>Name</td>
+			<td>Description</td>
+			<td>Price</td>
+			<td>Actions</td>
+		</tr>
+	</thead>
+	<tbody>
+		<% @products.each do |product| %>
+		<tr>
+			<td><%= product.name %></td>
+			<td><%= product.description %></td>
+			<td><%= number_to_currency(product.pricing) %></td>
+			<td>
+				<a href="/products/<%= product.id %>">SHOW</a>
+			 | <a href="/products/<%= product.id %>/edit">EDIT</a> | <form action="/products/<%= product.id %>" method = "post">
+			 <input type="hidden" name="_method" value="delete">
+			 <%= hidden_field_tag :authenticity_token, form_authenticity_token %>
+			 <input type="submit" value="delete"></a></form>
+			</td>
+		</tr>
+		<%end%>
+	</tbody>
+</table>
+
+<a href="/products/new">New Product</a>
